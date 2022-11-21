@@ -1,0 +1,201 @@
+PRODUCTS
+==============
+
+
+GET = localhost:4000/api/products
+====================================================================
+
+JSON POST = localhost:4000/api/product/new (Solo esta permitido a rol ("admin") debe primero loguearse y estar bajo ese rol de autorización - Tener en cuenta que por defecto el usuario se crea el rol de "user" 
+
+{"name" : "Marmol liquido 100 ml","price" : "250000","description" : "Llevalo prueba suerte", "rating" : "5.0","imagen" : [{"public_id" : "products/dsvbpny402gelwugv2le","url" : "https://m.media-amazon.com/images/I/71ckHhOWoML._AC_SL1500_.jpg"}],"category" : "Kitchen", "role" : "Administrator","stock" : 20,"scoreProduct" : 50,"comments": []}
+====================================================================
+
+GET BY ID = localhost:4000/api/product/id
+
+localhost:4000/api/product/634741c7f8c42d594876c811 ---> Found
+
+localhost:4000/api/product/634741c7f8c42d594876c812 ---> Not Found
+====================================================================
+
+JSON UPDATE = localhost:4000/api/products/id
+
+localhost:4000/api/product/634741c7f8c42d594876c811 ---> Found
+
+{"price" : "370000"}
+====================================================================
+
+JSON PUT = localhost:4000/api/products/id
+
+localhost:4000/api/products/id634741c7f8c42d594876c811
+
+
+
+APUNTES DE FUNCIONALIDAD DE FETCH
+====================================================================
+
+--> Permite realizar consultar en el editor de código, visualizando respuestas en consola, simula las cosultas externas que se realizan a Postman
+
+1. Ejecutar comando por consola -->> nmp install node-fetch
+
+2. Utilizar la siguiente línea de código de importación de recursos - alterna la opcion de utilizar objetos módulos
+	const fetch =(url)=>import('node-fetch').then(({default:fetch})=>fetch(url));
+
+3. Utilizar opción
+
+// View All Products
+function viewAllProducts(){
+    fetch("http://localhost:4000/api/products")
+    .then(res=>res.json())
+    .then(res=>console.log(res))
+    .catch(err=>console.error(err))
+}
+
+// View Products By Id
+function viewProductById(id){
+    fetch("http://localhost:4000/api/producto/"+id)
+    .then(res=>res.json())
+    .then(res=>console.log(res))
+    .catch(err=>console.error(err))
+
+-->> viewProductById("634741c7f8c42d594876c811"); 
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+USERS
+=============
+
+
+json POST user: localhost:4000/api/user/register
+=================================================================
+
+{
+    "name": "Roa",
+    "email": "Roa@gmail.com",
+    "password": "Roa98765+"
+}
+
+json GET user: localhost:4000/api/login
+=================================================================
+{
+    "email": "Roa@gmail.com",
+    "password": "Roa98765+"
+}
+
+
+json GET user: localhost:4000/api/logout
+=================================================================
+{
+    "email": "Roa@gmail.com",
+    "password": "Roa98765+"
+}
+
+
+json POST user solicitud para contraseña olvidada: localhost:4000/api/forgotPassword
+=====================================================================================
+
+{
+    "email": "Roa@gmail.com"
+}
+
+
+json POST user restablecer contraseña olvidada:(incluye despues del /token)  http://localhost:4000/api/resetPassword/415451a179c1352b05055581a7dd2b8961f01b3c
+=============================================================================================================================================================
+
+{
+    "password": "123456789",
+    "confirmPassword": "123456789"
+}
+
+
+json GET: http://localhost:4000/api/myaccount (Trae información de usuario previamente logueado - No requiere parámetro json)
+=============================================================================================================================================================
+
+json PUT: http://localhost:4000/api/myaccount/updatePassword (Actualiza contraseña de usuario previamente logueado)
+=============================================================================================================================================================
+
+{
+    "oldPassword": "123456789",
+    "newPassword": "123456789+"
+}
+
+json PUT: http://localhost:4000/api/myaccount/updateProfile (Actualiza perfil de usuario previamente logueado)
+=============================================================================================================================================================
+
+{
+    "email": "Roalisson@gmail.com"
+}
+
+json GET: http://localhost:4000/api/admin/viewAllUsers (Accede a ver todos los perfiles de usuario y debe tener rol de Admin - No requiere parámetro json)
+=============================================================================================================================================================
+
+json GET: http://localhost:4000/api/admin/user/63633732d0375fc467f25968 (Accede a ver el perfil del usuario identificado con ID 63633732d0375fc467f25968 - Permisos solo para rol de Admin - No requiere parámetro json, solo necesita indicarse en id en la ruta de consulta)
+==============================================================================================================================================================================================================================================================================
+
+json PUT: http://localhost:4000/api/admin/updateUser/6361a0850304697d20492119 (Accede a ver y permite modificar el perfil del usuario identificado con ID 6361a0850304697d20492119  - Permisos solo para rol de Admin - Requiere parámetro(s) json)
+===================================================================================================================================================================================================================================================
+
+{
+    "email": "instanciaunox@gmail.com"
+}
+
+json DELETE: http://localhost:4000/api/admin/deleteUser/63633732d0375fc467f25968 (Accede a ver y permite eliminar el perfil del usuario identificado con ID 63633732d0375fc467f25968 - Permisos solo para rol de Admin - No requiere parámetro json, solo necesita indicarse en id en la ruta de consulta)
+=======================================================================================================================================================================================================================================================================================================
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+ORDERS
+===========
+
+json POST = http://localhost:4000/api/order/new
+
+{
+    "itemsPrice": 10000,
+    "taxPrice": 0.09,
+    "shippingPrice": 22000,
+    "totalPrice": 32000,
+    "items": [
+        {
+            "product": "6351e3c3c85f4d033a110964",
+            "name": "SportSpeed",
+            "price": 27000,
+            "imagen": "./images/products/sportSpeed.jpg",
+            "quantity": 1
+        }
+    ],
+    "shippingInfo": {
+        "address": "Quinta N",
+        "city": "Feature",
+        "phone": 86759443,
+        "departament": "Unique",
+        "country": "In the world"
+    },
+    "paymentInfo": {
+        "id": "6351e3c3c85f4d033a110964",
+        "status": "Successfully"
+    }
+}
+
+
+json GET = http://localhost:4000/api/order/636a05f0607b45ffd11c844a (Trae una orden por ID especificada - No requiere parámetro json)
+===========================================================================================================================================
+
+
+json GET = http://localhost:4000/api/orders/historyOrders (Trae historial de ordenes por usuario previamente logueado, haciendo referencia al campo historyOrders - No requiere parámetro json)
+===============================================================================================================================================================================================
+
+json GET = http://localhost:4000/api/admin/orders (Trae todas las ordenes alojadas en la DB haciendo referencia al campo orders  - Uso autorizado para rol Admin - No requiere parámetro json)
+===============================================================================================================================================================================================
+
+json PUT = http://localhost:4000/api/admin/updateOrder/636a05f0607b45ffd11c844a (Permite actualizar el estado del pedido (procesando, enviado, etc) con fines a informar al usuario - Requiere como referencia el ID de la orden de pedido - Uso autorizado para rol Admin - No requiere parámetro json)
+========================================================================================================================================================================================================================================================================================================
+
+json DELETE = http://localhost:4000/api/admin/deleteOrder/636a07c8607b45ffd11c844e (Permite eliminar orden - Requiere como referencia el ID de la orden de pedido - Uso autorizado para rol Admin - No requiere parámetro json)
+===============================================================================================================================================================================================================================
+
+
+
