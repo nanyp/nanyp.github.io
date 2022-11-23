@@ -3,7 +3,9 @@ const connectDataBase = require("./config/database");
 const cloudinary = require("cloudinary")
 const cors = require('cors')
 
-app.use(cors())
+app.use(cors({
+    origin: "https://stone-store.onrender.com/"
+}))
 
 // Set file config
 const dotenv = require("dotenv");
