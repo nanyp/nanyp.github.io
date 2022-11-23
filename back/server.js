@@ -21,5 +21,3 @@ cloudinary.config({
 const server = app.listen(process.env.PORT, () => {
     console.log(`Server started on port: ${process.env.PORT} in mode: ${process.env.NODE_ENV}`)
 })
-
-header("Access-Control-Allow-Origin: *")
