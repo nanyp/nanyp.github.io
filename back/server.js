@@ -1,6 +1,9 @@
 const app = require("./app")
 const connectDataBase = require("./config/database");
 const cloudinary = require("cloudinary")
+const cors = require('cors')
+
+app.use(cors())
 
 // Set file config
 const dotenv = require("dotenv");
