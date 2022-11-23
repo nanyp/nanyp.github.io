@@ -4,6 +4,7 @@ const errorMiddleware = require("./middleware/errors")
 const cookieParser = require("cookie-parser")
 const bodyParser = require('body-parser')
 const fileUpload = require('express-fileupload')
+const cors = require('cors')
 
 // Using imported constants
 app.use(express.json());
@@ -28,5 +29,10 @@ app.use("/api", ventas);
 
 //MiddleWare to handle errors
 app.use(errorMiddleware)
+app.use(
+    cors({
+        origin: ["http://localhost:3000","https://stone-store.onrender.com"]
+    })
+);
 
 module.exports = app;
