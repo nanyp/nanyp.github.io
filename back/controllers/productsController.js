@@ -100,7 +100,7 @@ exports.deleteProduct = catchAsyncErrors(async (req, res, next) => {
 // View All Products - FETCH
 
 function viewProducts() {
-    fetch("http://localhost:4000/api/products")
+    fetch("https://stone-store-api.onrender.com/api/products")
       .then(res => res.json())
       .then(res => console.log(res))
       .catch(err => console.error(err))
@@ -110,7 +110,7 @@ function viewProducts() {
 
 //View by ID
 function viewProductById(id) {
-    fetch("http://localhost:4000/api/product/" + id)
+    fetch("https://stone-store-api.onrender.com/api/product/" + id)
       .then(res => res.json())
       .then(res => console.log(res))
       .catch(err => console.error(err))
