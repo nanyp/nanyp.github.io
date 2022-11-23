@@ -25,7 +25,7 @@ export const getProducts = () => async (dispatch) => {
 
     // let link = `/api/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}`
 
-    const { data } = await axios.get("https://stone-store-api.onrender.com/api/products/api/products")
+    const { data } = await axios.get("https://stone-store-api.onrender.com/api/products")
 
     dispatch({
       type: ALL_PRODUCTS_SUCCESS,
